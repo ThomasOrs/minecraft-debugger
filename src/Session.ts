@@ -21,6 +21,7 @@ import {
     QuickPickOptions,
     workspace,
     window,
+    debug,
 } from 'vscode';
 import { DebugProtocol } from '@vscode/debugprotocol';
 import { EventEmitter } from 'events';
@@ -133,6 +134,10 @@ export class Session extends DebugSession {
 
         // listen for events from the HomeViewProvider
         this._eventEmitter.on('run-minecraft-command', (command: string) => {
+            if (!debug.activeDebugSession) {
+                window.showErrorMessage('Command shortcuts require a debug session.');
+                return;
+            }
             this.sendDebuggeeMessage({
                 type: 'minecraftCommand',
                 command: command,
