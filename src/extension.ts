@@ -49,8 +49,25 @@ export function activate(context: vscode.ExtensionContext) {
         }
     );
 
+    // Create a command to send commands to the client
+    const runMinecraftCommand = vscode.commands.registerCommand(
+        'minecraft-debugger.runMinecraftCommand',
+        (...args: any[]) => {
+            if (args.length === 0) {
+                vscode.window.showErrorMessage('No command provided.');
+                return;
+            }
+            const command = args[0]; // Use only the first argument
+            if (typeof command !== 'string') {
+                vscode.window.showErrorMessage('Command must be a string.');
+                return;
+            }
+            eventEmitter.emit('run-minecraft-command', args);
+        }
+    );
+
     // Add command to the extension context
-    context.subscriptions.push(showDiagnosticsCommand);
+    context.subscriptions.push(showDiagnosticsCommand, runMinecraftCommand);
 }
 
 // called when extension is deactivated
