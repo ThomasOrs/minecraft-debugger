@@ -30,8 +30,7 @@
     "private": true,
     "activationEvents": [
         "onDebug",
-        "onCommand:extension.minecraft-js.getPort",
-        "onCommand:minecraft-debugger.minecraftReload"
+        "onCommand:extension.minecraft-js.getPort"
     ],
     "main": "./dist/extension.js",
     "contributes": {
@@ -60,7 +59,7 @@
             },
             {
                 "command": "minecraft-debugger.minecraftReload",
-                "title": "Get Minecraft Debugger Port"
+                "title": "Minecraft Diagnostics: Reload Minecraft"
             }
         ],
         "breakpoints": [
