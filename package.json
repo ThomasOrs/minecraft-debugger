@@ -30,7 +30,8 @@
     "private": true,
     "activationEvents": [
         "onDebug",
-        "onCommand:extension.minecraft-js.getPort"
+        "onCommand:extension.minecraft-js.getPort",
+        "onCommand:minecraft-debugger.minecraftReload"
     ],
     "main": "./dist/extension.js",
     "contributes": {
@@ -56,11 +57,21 @@
             {
                 "command": "minecraft-debugger.showMinecraftDiagnostics",
                 "title": "Minecraft Diagnostics: Show"
+            },
+            {
+                "command": "minecraft-debugger.minecraftReload",
+                "title": "Get Minecraft Debugger Port"
             }
         ],
         "breakpoints": [
             {
                 "language": "javascript"
+            }
+        ],
+        "keybindings":[
+            {
+                "command": "minecraft-debugger.minecraftReload",
+                "key": "ctrl+shift+r"
             }
         ],
         "debuggers": [

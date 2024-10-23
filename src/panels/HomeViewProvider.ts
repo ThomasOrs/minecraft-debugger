@@ -61,10 +61,10 @@ export class HomeViewProvider implements vscode.WebviewViewProvider {
                     break;
                 }
                 case 'run-minecraft-command': {
-                    if (!data.command || data.command.trim() === '') {
+                    if (!message.command || message.command.trim() === '') {
                         vscode.window.showErrorMessage('Command cannot be empty.');
                     } else {
-                        this._eventEmitter.emit('run-minecraft-command', data.command);
+                        this._eventEmitter.emit('run-minecraft-command', message.command);
                     }
                     break;
                 }

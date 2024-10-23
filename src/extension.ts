@@ -1,4 +1,3 @@
-
 // Copyright (C) Microsoft Corporation.  All rights reserved.
 
 import * as vscode from 'vscode';
@@ -62,12 +61,19 @@ export function activate(context: vscode.ExtensionContext) {
                 vscode.window.showErrorMessage('Command must be a string.');
                 return;
             }
-            eventEmitter.emit('run-minecraft-command', args);
+            if (!vscode.debug.activeDebugSession) {
+                vscode.window.showErrorMessage('No active debug session.');
+            }
+            eventEmitter.emit('run-minecraft-command', args[0]);
         }
     );
 
+    const minecraftReloadCommand = vscode.commands.registerCommand('minecraft-debugger.minecraftReload', () => {
+        eventEmitter.emit('run-minecraft-command', 'reload');
+    });
+
     // Add command to the extension context
-    context.subscriptions.push(showDiagnosticsCommand, runMinecraftCommand);
+    context.subscriptions.push(showDiagnosticsCommand, runMinecraftCommand, minecraftReloadCommand);
 }
 
 // called when extension is deactivated
